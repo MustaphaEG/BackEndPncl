@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <header></header>
+    <style>
+        html{
+            background-color: #eee;
+        }
+        #app-container{
+            width: 60%;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-flow: column;
+        }
+        #search-input{
+            font-size: 16px;
+            padding: 10px;
+
+        }
+
+        #app-container ul{
+            min-height: 250px;
+        }
+    </style>
+    <body>
+        <div id="app-container">
+            <div>
+                <ul id="out-list">
+                    
+                </ul>
+            </div>
+            <input id="search-input" placeholder="Search for Question">
+        </div>
+    </body>
+    <script>
+        console.log(
+            "Hello world"
+        )
+
+        document.getElementById("search-input").onkeyup = async function(e){
+            if(e.target.value == "")
+                return;
+
+            const Req = await fetch(`/search?q=${e.target.value}`);
+            const Res = await Req.json();
+            let List = ``;
+            for(let OneQue of Res){
+                List += `<li><a href="/topic/${OneQue.id_topic}">${OneQue.Que.annotation}</a></li>`;
+
+            }
+
+            document.getElementById("out-list").innerHTML = List;
+        }
+    </script>
+</html>
