@@ -16,5 +16,5 @@ const TopicSchema = new mongoose.Schema({
 
 });
 
-
+TopicSchema.index({ Path2Root: "text" }); 
 module.exports =  mongoose.model("topics", TopicSchema);;
